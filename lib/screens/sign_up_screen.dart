@@ -115,7 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
-            color: AppTheme.textLightPrimary,
+            color: Colors.black,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),

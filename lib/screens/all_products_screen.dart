@@ -30,7 +30,7 @@ class AllProductsScreen extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.arrow_back_ios_new_rounded,
-                color: AppTheme.textLightPrimary, size: 18),
+                color: Colors.black, size: 18),
           ),
         ),
         title: Text(

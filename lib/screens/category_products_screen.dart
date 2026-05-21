@@ -28,7 +28,7 @@ class CategoryProductsScreen extends StatelessWidget {
             ),
             child: const Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: AppTheme.textLightPrimary,
+              color: Colors.black,
               size: 18,
             ),
           ),
