@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import '../providers/navigation_provider.dart';
+import '../providers/theme_provider.dart';
 import '../theme/app_theme.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -40,6 +41,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final user = _user;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+
     return Scaffold(
       backgroundColor: AppTheme.bgLight,
       body: CustomScrollView(
@@ -178,6 +182,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     'Help & Support',
                     color: AppTheme.neonBlue,
                     onTap: () {},
+                  ),
+                  _buildMenuSwitch(
+                    isDarkMode ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+                    'Dark Mode',
+                    color: Colors.indigo,
+                    value: isDarkMode,
+                    onChanged: (value) {
+                      themeProvider.toggleTheme();
+                    },
                   ),
                   _buildMenuItem(
                     Icons.language_rounded,
@@ -339,6 +352,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
           size: 20,
         ),
         onTap: onTap,
+      ),
+    );
+  }
+
+  Widget _buildMenuSwitch(
+    IconData icon,
+    String label, {
+    required Color color,
+    required bool value,
+    required ValueChanged<bool> onChanged,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 4),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: SwitchListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
+        secondary: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(icon, color: color, size: 22),
+        ),
+        title: Text(
+          label,
+          style: TextStyle(
+            color: AppTheme.textLightPrimary,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        value: value,
+        onChanged: onChanged,
+        activeColor: color,
+        activeTrackColor: color.withValues(alpha: 0.4),
       ),
     );
   }

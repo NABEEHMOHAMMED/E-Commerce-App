@@ -1,10 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/product.dart';
+import '../database/cart_database_helper.dart';
 
 class CartItem {
   final Product product;
@@ -12,17 +10,27 @@ class CartItem {
 
   CartItem({required this.product, this.quantity = 1});
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toDbMap(String userId) {
     return {
-      'product': product.toJson(),
+      'id': product.id,
+      'title': product.name,
+      'price': product.price,
+      'image': product.imageUrl,
       'quantity': quantity,
+      'userId': userId,
     };
   }
 
-  factory CartItem.fromJson(Map<String, dynamic> json) {
+  factory CartItem.fromDbMap(Map<String, dynamic> map) {
     return CartItem(
-      product: Product.fromJson(json['product']),
-      quantity: json['quantity'],
+      product: Product(
+        id: map['id'],
+        name: map['title'],
+        categoryId: 'others',
+        price: map['price'],
+        imageUrl: map['image'],
+      ),
+      quantity: map['quantity'],
     );
   }
 }
@@ -44,102 +52,92 @@ class CartProvider extends ChangeNotifier {
   double get totalPrice => subtotal;
 
   StreamSubscription<User?>? _authSubscription;
-  String? _currentUserId;
+  String _currentUserId = 'guest';
 
   CartProvider() {
-    // ─── Listen to Authentication changes to isolate cart ───────────
+    // Check initial user
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      _currentUserId = currentUser.uid;
+    }
+    _loadFromDb();
+
+    // Listen to Authentication changes to isolate cart
     _authSubscription = FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user != null) {
-        _currentUserId = user.uid;
-        _loadFromDisk();
+        if (_currentUserId != user.uid) {
+           _currentUserId = user.uid;
+           _loadFromDb();
+        }
       } else {
-        _currentUserId = null;
-        _items = [];
-        notifyListeners();
+        if (_currentUserId != 'guest') {
+          _currentUserId = 'guest';
+          _loadFromDb();
+        }
       }
     });
   }
 
-  void addToCart(Product product) {
+  Future<void> addToCart(Product product) async {
     final existingIndex = _items.indexWhere(
       (item) => item.product.id == product.id,
     );
 
     if (existingIndex >= 0) {
       _items[existingIndex].quantity++;
+      notifyListeners();
+      await CartDatabaseHelper.instance.update(_items[existingIndex].toDbMap(_currentUserId));
     } else {
-      _items.add(CartItem(product: product));
+      final newItem = CartItem(product: product);
+      _items.add(newItem);
+      notifyListeners();
+      await CartDatabaseHelper.instance.insert(newItem.toDbMap(_currentUserId));
     }
-    notifyListeners();
-    _saveToDisk(); // حفظ التغيير
   }
 
-  void increaseQuantity(String productId) {
+  Future<void> increaseQuantity(String productId) async {
     final index = _items.indexWhere((item) => item.product.id == productId);
     if (index >= 0) {
       _items[index].quantity++;
       notifyListeners();
-      _saveToDisk();
+      await CartDatabaseHelper.instance.update(_items[index].toDbMap(_currentUserId));
     }
   }
 
-  void decreaseQuantity(String productId) {
+  Future<void> decreaseQuantity(String productId) async {
     final index = _items.indexWhere((item) => item.product.id == productId);
     if (index >= 0) {
       if (_items[index].quantity > 1) {
         _items[index].quantity--;
+        notifyListeners();
+        await CartDatabaseHelper.instance.update(_items[index].toDbMap(_currentUserId));
       } else {
         _items.removeAt(index);
+        notifyListeners();
+        await CartDatabaseHelper.instance.delete(productId, _currentUserId);
       }
-      notifyListeners();
-      _saveToDisk();
     }
   }
 
-  void removeFromCart(String productId) {
+  Future<void> removeFromCart(String productId) async {
     _items.removeWhere((item) => item.product.id == productId);
     notifyListeners();
-    _saveToDisk();
+    await CartDatabaseHelper.instance.delete(productId, _currentUserId);
   }
 
-  void clearCart() {
+  Future<void> clearCart() async {
     _items.clear();
     notifyListeners();
-    _saveToDisk();
+    await CartDatabaseHelper.instance.deleteAll(_currentUserId);
   }
 
-  // ─── منطق التخزين المحلي (Persistence) ───────────────────────────────
-
-  Future<File> _getCartFile() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final suffix = _currentUserId != null ? '_$_currentUserId' : '';
-    return File('${directory.path}/cart$suffix.json');
-  }
-
-  Future<void> _saveToDisk() async {
+  Future<void> _loadFromDb() async {
     try {
-      final file = await _getCartFile();
-      final String jsonString = json.encode(
-        _items.map((item) => item.toJson()).toList(),
-      );
-      await file.writeAsString(jsonString);
+      final data = await CartDatabaseHelper.instance.query('cart_items', _currentUserId);
+      _items = data.map((item) => CartItem.fromDbMap(item)).toList();
+      notifyListeners();
     } catch (e) {
-      debugPrint('Error saving cart: $e');
-    }
-  }
-
-  Future<void> _loadFromDisk() async {
-    try {
-      final file = await _getCartFile();
-      if (await file.exists()) {
-        final String jsonString = await file.readAsString();
-        final List<dynamic> jsonList = json.decode(jsonString);
-        
-        _items = jsonList.map((item) => CartItem.fromJson(item)).toList();
-        notifyListeners();
-      }
-    } catch (e) {
-      debugPrint('Error loading cart: $e');
+      debugPrint('Error loading cart from db: $e');
     }
   }
 
