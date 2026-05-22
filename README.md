@@ -84,11 +84,13 @@ MultiProvider(
 *   Configured `snapshots()` on `FavoriteProvider` to stream live updates.
 *   Leveraged Firestore's native cache for offline availability.
 
-### 🏆 Exercise 4 — Local Persistence
-*   **SQFlite Integration:** Replaced JSON file persistence with a structured SQLite database for the shopping cart.
-*   **Data Isolation:** Implemented logic to filter cart items by the active `userId`.
-*   **Shared Preferences:** Implemented theme persistence to remember user appearance settings.
-*   **Dynamic Theme Refactoring:** Updated the entire UI layer to use `Theme.of(context)` for automatic adaptation to Dark/Light modes.
+### 🏆 Exercise 4 — Local Persistence & UI Polish
+*   **SQFlite Integration:** Replaced JSON file persistence with a structured SQLite database for the shopping cart (`cart_items` table).
+*   **Data Isolation:** Implemented logic to filter cart items by the active `userId` to handle sessions smoothly.
+*   **Shared Preferences:** Implemented theme persistence to remember user appearance settings, establishing **Light Mode** as the default choice upon first installation.
+*   **Dynamic Theme & Visibility Fixes:** Polished the entire UI layer to use `Theme.of(context)` for automatic adaptation:
+    *   Fixed critical text readability issues in authentication forms (`SignInScreen` & `SignUpScreen`) when Dark Mode is active.
+    *   Enhanced category cards (especially the **Gaming** category) and product quantity indicators to guarantee high visibility and contrast during Dark Mode.
 
 ---
 
