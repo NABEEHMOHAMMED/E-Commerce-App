@@ -1,5 +1,6 @@
 import 'package:e_commerce_app_with_provider/providers/navigation_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import '../providers/favorite_provider.dart';
 import '../theme/app_theme.dart';
@@ -12,8 +13,7 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bgLight,
-      appBar: AppBar(
+            appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
@@ -37,10 +37,12 @@ class FavoritesScreen extends StatelessWidget {
             ),
           ),
         ),
-        title: const Text(
+        title: Text(
           'My Favorites',
           style: TextStyle(
-            color: AppTheme.textLightPrimary,
+            color: (Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : const Color(0xFF1A1D2E)),
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -95,21 +97,27 @@ class FavoritesScreen extends StatelessWidget {
                         size: 24,
                       ),
                     ),
-                    const SizedBox(width: 14),
+                    SizedBox(width: 14),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           '${favoriteProvider.favorites.length} items',
-                          style: const TextStyle(
-                            color: AppTheme.textLightMuted,
+                          style: TextStyle(
+                            color:
+                                (Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white54
+                                : const Color(0xFF8E92A6)),
                             fontSize: 13,
                           ),
                         ),
-                        const Text(
+                        Text(
                           'Saved for you',
                           style: TextStyle(
-                            color: AppTheme.textLightPrimary,
+                            color:
+                                (Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : const Color(0xFF1A1D2E)),
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -193,21 +201,32 @@ class FavoritesScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
+          Text(
             'No favorites yet',
             style: TextStyle(
-              color: AppTheme.textLightPrimary,
+              color:
+                  (Theme.of(context as BuildContext).brightness ==
+                      Brightness.dark
+                  ? Colors.white
+                  : const Color(0xFF1A1D2E)),
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 8),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Text(
               'Tap the heart icon on any product to save it here.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppTheme.textLightMuted, fontSize: 13),
+              style: TextStyle(
+                color:
+                    (Theme.of(context as BuildContext).brightness ==
+                        Brightness.dark
+                    ? Colors.white54
+                    : const Color(0xFF8E92A6)),
+                fontSize: 13,
+              ),
             ),
           ),
         ],

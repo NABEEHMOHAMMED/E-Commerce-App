@@ -58,9 +58,9 @@ class ProductCard extends StatelessWidget {
                       ),
                       errorWidget: (context, url, error) => Container(
                         color: AppTheme.bgLightSurface,
-                        child: const Icon(
+                        child: Icon(
                           Icons.image_not_supported,
-                          color: AppTheme.textLightMuted,
+                          color: (Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Color(0xFF8E92A6)),
                         ),
                       ),
                     ),
@@ -154,13 +154,13 @@ class ProductCard extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 3),
+                      SizedBox(height: 3),
                       Text(
                         product.name,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: AppTheme.textLightPrimary,
+                        style: TextStyle(
+                          color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           height: 1.2,
@@ -191,25 +191,25 @@ class ProductCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                       ],
                       Row(
                         children: [
                           Text(
                             '\$${product.price.toStringAsFixed(1)}',
-                            style: const TextStyle(
-                              color: AppTheme.textLightPrimary,
+                            style: TextStyle(
+                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4),
                           if (product.oldPrice != null)
                             Flexible(
                               child: Text(
                                 '\$${product.oldPrice!.toStringAsFixed(1)}',
-                                style: const TextStyle(
-                                  color: AppTheme.textLightMuted,
+                                style: TextStyle(
+                                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Color(0xFF8E92A6)),
                                   fontSize: 9,
                                   decoration: TextDecoration.lineThrough,
                                 ),
@@ -220,16 +220,16 @@ class ProductCard extends StatelessWidget {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.star_rounded,
                                 color: AppTheme.neonYellow,
                                 size: 10,
                               ),
-                              const SizedBox(width: 1),
+                              SizedBox(width: 1),
                               Text(
                                 '${product.rating}',
-                                style: const TextStyle(
-                                  color: AppTheme.textLightPrimary,
+                                style: TextStyle(
+                                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
                                 ),

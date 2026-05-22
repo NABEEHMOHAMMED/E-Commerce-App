@@ -14,7 +14,6 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bgLight,
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
@@ -25,27 +24,31 @@ class ProductDetailScreen extends StatelessWidget {
             backgroundColor: AppTheme.primaryPurple,
             leading: _buildCircleBackButton(context),
             actions: [
-               _buildCircleActionButton(
-                 context,
-                 icon: Icons.share_rounded,
-                 onTap: () {
-                   ScaffoldMessenger.of(context).showSnackBar(
-                     SnackBar(
-                       content: const Text('Link copied to clipboard!'),
-                       backgroundColor: AppTheme.primaryPurple,
-                       duration: const Duration(seconds: 2),
-                       behavior: SnackBarBehavior.floating,
-                       shape: RoundedRectangleBorder(
-                           borderRadius: BorderRadius.circular(12)),
-                     ),
-                   );
-                 },
-               ),
-             ],
+              _buildCircleActionButton(
+                context,
+                icon: Icons.share_rounded,
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('Link copied to clipboard!'),
+                      backgroundColor: AppTheme.primaryPurple,
+                      duration: const Duration(seconds: 2),
+                      behavior: SnackBarBehavior.floating,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.black.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(20),
@@ -58,7 +61,6 @@ class ProductDetailScreen extends StatelessWidget {
                     color: Colors.white,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    
                   ),
                 ),
               ),
@@ -75,7 +77,9 @@ class ProductDetailScreen extends StatelessWidget {
                       child: const Center(
                         child: CircularProgressIndicator(
                           strokeWidth: 3,
-                          valueColor: AlwaysStoppedAnimation<Color>(AppTheme.primaryPurple),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppTheme.primaryPurple,
+                          ),
                         ),
                       ),
                     ),
@@ -111,7 +115,10 @@ class ProductDetailScreen extends StatelessWidget {
                       top: 60,
                       left: 16,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 8,
+                        ),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
                             colors: [AppTheme.neonRed, Color(0xFFFF6B6B)],
@@ -133,7 +140,6 @@ class ProductDetailScreen extends StatelessWidget {
                             color: Colors.white,
                             fontSize: 13,
                             fontWeight: FontWeight.w800,
-                            
                           ),
                         ),
                       ),
@@ -143,7 +149,10 @@ class ProductDetailScreen extends StatelessWidget {
             ),
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(1),
-              child: Container(height: 1, color: Colors.white.withValues(alpha: 0.1)),
+              child: Container(
+                height: 1,
+                color: Colors.white.withValues(alpha: 0.1),
+              ),
             ),
           ),
 
@@ -157,7 +166,10 @@ class ProductDetailScreen extends StatelessWidget {
                 children: [
                   // Category Badge
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       gradient: AppTheme.primaryGradient,
                       borderRadius: BorderRadius.circular(20),
@@ -168,21 +180,21 @@ class ProductDetailScreen extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
-                        
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
 
                   // Product Name
                   Text(
                     product.name,
-                    style: const TextStyle(
-                      color: AppTheme.textLightPrimary,
+                    style: TextStyle(
+                      color: (Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Color(0xFF1A1D2E)),
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       height: 1.3,
-                      
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -195,13 +207,13 @@ class ProductDetailScreen extends StatelessWidget {
                     children: [
                       _buildRatingChip(),
                       _buildTimeChip(),
-                      _buildShareButton(),
+                      _buildShareButton(context),
                     ],
                   ),
                   const SizedBox(height: 16),
 
                   // Price Section
-                  _buildPriceSection(),
+                  _buildPriceSection(context),
                   const SizedBox(height: 20),
 
                   // Divider
@@ -212,25 +224,29 @@ class ProductDetailScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'About this product',
                         style: TextStyle(
-                          color: AppTheme.textLightPrimary,
+                          color:
+                              (Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Color(0xFF1A1D2E)),
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
-                          
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       Text(
                         product.description.isNotEmpty
                             ? product.description
                             : 'Premium quality product. Crafted with care and precision to give you the best experience. Perfect for everyday use and built to last.',
-                        style: const TextStyle(
-                          color: AppTheme.textLightSecondary,
+                        style: TextStyle(
+                          color:
+                              (Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white70
+                              : Color(0xFF5A5F7A)),
                           fontSize: 14,
                           height: 1.7,
-                          
                         ),
                       ),
                     ],
@@ -263,14 +279,20 @@ class ProductDetailScreen extends StatelessWidget {
             ),
           ],
         ),
-        child: const Icon(Icons.arrow_back_ios_new_rounded,
-            color: Colors.black, size: 18),
+        child: const Icon(
+          Icons.arrow_back_ios_new_rounded,
+          color: Colors.black,
+          size: 18,
+        ),
       ),
     );
   }
 
-  Widget _buildCircleActionButton(BuildContext context,
-      {required IconData icon, required VoidCallback onTap}) {
+  Widget _buildCircleActionButton(
+    BuildContext context, {
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -310,7 +332,6 @@ class ProductDetailScreen extends StatelessWidget {
               color: Colors.white,
               fontSize: 12,
               fontWeight: FontWeight.w700,
-              
             ),
           ),
         ],
@@ -329,8 +350,11 @@ class ProductDetailScreen extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.access_time_rounded,
-              color: AppTheme.accentOrange, size: 14),
+          const Icon(
+            Icons.access_time_rounded,
+            color: AppTheme.accentOrange,
+            size: 14,
+          ),
           const SizedBox(width: 4),
           Text(
             product.timeLeft ?? 'Ending soon',
@@ -338,7 +362,6 @@ class ProductDetailScreen extends StatelessWidget {
               color: AppTheme.accentOrange,
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              
             ),
           ),
         ],
@@ -346,7 +369,7 @@ class ProductDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildShareButton() {
+  Widget _buildShareButton(BuildContext context) {
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -355,13 +378,18 @@ class ProductDetailScreen extends StatelessWidget {
           color: AppTheme.bgLightSurface,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: const Icon(Icons.share_rounded,
-            color: AppTheme.textLightMuted, size: 18),
+        child: Icon(
+          Icons.share_rounded,
+          color: (Theme.of(context).brightness == Brightness.dark
+              ? Colors.white54
+              : const Color(0xFF8E92A6)),
+          size: 18,
+        ),
       ),
     );
   }
 
-  Widget _buildPriceSection() {
+  Widget _buildPriceSection(BuildContext context) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.end,
       spacing: 10,
@@ -369,8 +397,10 @@ class ProductDetailScreen extends StatelessWidget {
       children: [
         Text(
           '\$${product.price.toStringAsFixed(2)}',
-          style: const TextStyle(
-            color: AppTheme.textLightPrimary,
+          style: TextStyle(
+            color: (Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : const Color(0xFF1A1D2E)),
             fontSize: 28,
             fontWeight: FontWeight.bold,
           ),
@@ -378,8 +408,10 @@ class ProductDetailScreen extends StatelessWidget {
         if (product.oldPrice != null) ...[
           Text(
             '\$${product.oldPrice!.toStringAsFixed(2)}',
-            style: const TextStyle(
-              color: AppTheme.textLightMuted,
+            style: TextStyle(
+              color: (Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white54
+                  : const Color(0xFF8E92A6)),
               fontSize: 16,
               decoration: TextDecoration.lineThrough,
               fontWeight: FontWeight.w500,
@@ -412,7 +444,6 @@ class ProductDetailScreen extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
           decoration: const BoxDecoration(
-            color: Colors.white,
             boxShadow: [
               BoxShadow(
                 color: Colors.black12,
@@ -437,7 +468,9 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
                 child: IconButton(
                   icon: Icon(
-                    isFav ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                    isFav
+                        ? Icons.favorite_rounded
+                        : Icons.favorite_border_rounded,
                     color: isFav ? Colors.white : AppTheme.textLightMuted,
                     size: 22,
                   ),
@@ -451,21 +484,23 @@ class ProductDetailScreen extends StatelessWidget {
                   height: 52,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      final cart =
-                          Provider.of<CartProvider>(context, listen: false);
+                      final cart = Provider.of<CartProvider>(
+                        context,
+                        listen: false,
+                      );
                       cart.addToCart(product);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
                             '${product.name} added to cart ✓',
-                            style:
-                                const TextStyle(fontWeight: FontWeight.w600),
+                            style: const TextStyle(fontWeight: FontWeight.w600),
                           ),
                           backgroundColor: AppTheme.primaryPurple,
                           duration: const Duration(seconds: 2),
                           behavior: SnackBarBehavior.floating,
-                          shape:
-                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
                       );
                     },
@@ -475,15 +510,15 @@ class ProductDetailScreen extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 16,
-                        
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppTheme.primaryPurple,
                       foregroundColor: Colors.white,
                       elevation: 4,
-                      shadowColor:
-                          AppTheme.primaryPurple.withValues(alpha: 0.3),
+                      shadowColor: AppTheme.primaryPurple.withValues(
+                        alpha: 0.3,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),

@@ -16,7 +16,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  
+
   bool _isLoading = false;
   bool _obscurePassword = true;
 
@@ -44,7 +44,9 @@ class _SignInScreenState extends State<SignInScreen> {
             content: const Text('Logged in successfully!'),
             backgroundColor: AppTheme.successGreen,
             behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
         );
       }
@@ -59,14 +61,16 @@ class _SignInScreenState extends State<SignInScreen> {
       } else if (e.code == 'user-disabled') {
         message = 'This user account has been disabled.';
       }
-      
+
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(message),
             backgroundColor: AppTheme.neonRed,
             behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
         );
       }
@@ -77,7 +81,9 @@ class _SignInScreenState extends State<SignInScreen> {
             content: Text('Error: ${e.toString()}'),
             backgroundColor: AppTheme.neonRed,
             behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
         );
       }
@@ -91,7 +97,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bgLight,
       body: Stack(
         children: [
           // Background Gradient Blob
@@ -119,12 +124,15 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
             ),
           ),
-          
+
           SafeArea(
             child: Center(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24.0,
+                  vertical: 16.0,
+                ),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -140,7 +148,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             borderRadius: BorderRadius.circular(24),
                             boxShadow: [
                               BoxShadow(
-                                color: AppTheme.primaryPurple.withValues(alpha: 0.3),
+                                color: AppTheme.primaryPurple.withValues(
+                                  alpha: 0.3,
+                                ),
                                 blurRadius: 16,
                                 offset: const Offset(0, 8),
                               ),
@@ -153,25 +163,31 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 24),
-                      const Center(
+                      SizedBox(height: 24),
+                      Center(
                         child: Text(
                           'ShopWave',
                           style: TextStyle(
-                            color: AppTheme.textLightPrimary,
+                            color:
+                                (Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Color(0xFF1A1D2E)),
                             fontSize: 32,
                             fontWeight: FontWeight.w900,
                             letterSpacing: 0.5,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      const Center(
+                      SizedBox(height: 8),
+                      Center(
                         child: Text(
                           'Welcome back! Please sign in to continue.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: AppTheme.textLightSecondary,
+                            color:
+                                (Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white70
+                                : Color(0xFF5A5F7A)),
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
@@ -186,7 +202,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                            color: AppTheme.bgLightSurface.withValues(alpha: 0.8),
+                            color: AppTheme.bgLightSurface.withValues(
+                              alpha: 0.8,
+                            ),
                             width: 1.5,
                           ),
                         ),
@@ -195,19 +213,33 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: TextFormField(
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
-                            style: const TextStyle(color: AppTheme.textLightPrimary),
+                            style: TextStyle(
+                              color:
+                                  (Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Color(0xFF1A1D2E)),
+                            ),
                             decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.email_outlined, color: AppTheme.primaryPurple),
+                              prefixIcon: const Icon(
+                                Icons.email_outlined,
+                                color: AppTheme.primaryPurple,
+                              ),
                               hintText: 'Email Address',
                               fillColor: Colors.white,
                               filled: true,
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your email';
                               }
-                              final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                              final emailRegExp = RegExp(
+                                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                              );
                               if (!emailRegExp.hasMatch(value)) {
                                 return 'Please enter a valid email address';
                               }
@@ -225,7 +257,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                            color: AppTheme.bgLightSurface.withValues(alpha: 0.8),
+                            color: AppTheme.bgLightSurface.withValues(
+                              alpha: 0.8,
+                            ),
                             width: 1.5,
                           ),
                         ),
@@ -234,20 +268,35 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: TextFormField(
                             controller: _passwordController,
                             obscureText: _obscurePassword,
-                            style: const TextStyle(color: AppTheme.textLightPrimary),
+                            style: TextStyle(
+                              color:
+                                  (Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Color(0xFF1A1D2E)),
+                            ),
                             decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.lock_outline_rounded, color: AppTheme.primaryPurple),
+                              prefixIcon: const Icon(
+                                Icons.lock_outline_rounded,
+                                color: AppTheme.primaryPurple,
+                              ),
                               hintText: 'Password',
                               fillColor: Colors.white,
                               filled: true,
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                                  color: AppTheme.textLightMuted,
+                                  _obscurePassword
+                                      ? Icons.visibility_off_outlined
+                                      : Icons.visibility_outlined,
                                 ),
                                 onPressed: () {
-                                  setState(() => _obscurePassword = !_obscurePassword);
+                                  setState(
+                                    () => _obscurePassword = !_obscurePassword,
+                                  );
                                 },
                               ),
                             ),
@@ -263,7 +312,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                       ),
-                      
+
                       const SizedBox(height: 28),
 
                       // Action / Submit button
@@ -272,7 +321,9 @@ class _SignInScreenState extends State<SignInScreen> {
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(AppTheme.primaryPurple),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppTheme.primaryPurple,
+                                  ),
                                 ),
                               ),
                             )
@@ -283,7 +334,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                 borderRadius: BorderRadius.circular(16),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppTheme.primaryPurple.withValues(alpha: 0.25),
+                                    color: AppTheme.primaryPurple.withValues(
+                                      alpha: 0.25,
+                                    ),
                                     blurRadius: 16,
                                     offset: const Offset(0, 8),
                                   ),
@@ -308,17 +361,21 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                               ),
                             ),
-                      
-                      const SizedBox(height: 24),
+
+                      SizedBox(height: 24),
 
                       // Register Link
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             "Don't have an account? ",
                             style: TextStyle(
-                              color: AppTheme.textLightSecondary,
+                              color:
+                                  (Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white70
+                                  : Color(0xFF5A5F7A)),
                               fontSize: 14,
                             ),
                           ),

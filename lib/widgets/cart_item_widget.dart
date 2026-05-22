@@ -46,9 +46,9 @@ class CartItemWidget extends StatelessWidget {
                   color: AppTheme.bgLightSurface,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.image_not_supported,
-                  color: AppTheme.textLightMuted,
+                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Color(0xFF8E92A6)),
                   size: 30,
                 ),
               ),
@@ -63,8 +63,8 @@ class CartItemWidget extends StatelessWidget {
                   item.product.name,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: AppTheme.textLightPrimary,
+                  style: TextStyle(
+                    color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -119,8 +119,8 @@ class CartItemWidget extends StatelessWidget {
                 ),
                 Text(
                   '${item.quantity}',
-                  style: const TextStyle(
-                    color: AppTheme.textLightPrimary,
+                  style: TextStyle(
+                    color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                   ),

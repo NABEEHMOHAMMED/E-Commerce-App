@@ -1,7 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
-import '../models/product.dart';
 
 class CartDatabaseHelper {
   static final CartDatabaseHelper instance = CartDatabaseHelper._init();

@@ -14,8 +14,7 @@ class AuthWrapper extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            backgroundColor: AppTheme.bgLight,
-            body: Container(
+                        body: Container(
               width: double.infinity,
               height: double.infinity,
               decoration: const BoxDecoration(
@@ -50,11 +49,11 @@ class AuthWrapper extends StatelessWidget {
                         valueColor: AlwaysStoppedAnimation<Color>(AppTheme.primaryPurple),
                       ),
                     ),
-                    const SizedBox(height: 24),
-                    const Text(
+                    SizedBox(height: 24),
+                    Text(
                       'Connecting securely...',
                       style: TextStyle(
-                        color: AppTheme.textLightPrimary,
+                        color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 0.5,

@@ -61,11 +61,11 @@ class CategoryCard extends StatelessWidget {
                   style: const TextStyle(fontSize: 36),
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Text(
                 category.name,
-                style: const TextStyle(
-                  color: AppTheme.textLightPrimary,
+                style: TextStyle(
+                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),

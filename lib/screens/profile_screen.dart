@@ -45,8 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
 
     return Scaffold(
-      backgroundColor: AppTheme.bgLight,
-      body: CustomScrollView(
+            body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
           // ─── Header Section ──────────────────────────────────
@@ -131,10 +130,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Account Settings',
                     style: TextStyle(
-                      color: AppTheme.textLightPrimary,
+                      color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       
@@ -210,12 +209,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       showDialog(
                         context: context,
                         builder: (ctx) => AlertDialog(
-                          title: const Text('Log Out'),
-                          content: const Text('Are you sure you want to log out of ShopWave?'),
+                          title: Text('Log Out'),
+                          content: Text('Are you sure you want to log out of ShopWave?'),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.of(ctx).pop(),
-                              child: const Text('Cancel', style: TextStyle(color: AppTheme.textLightSecondary)),
+                              child: Text('Cancel', style: TextStyle(color: (Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Color(0xFF5A5F7A)))),
                             ),
                             TextButton(
                               onPressed: () async {
@@ -253,13 +252,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.info_outline_rounded,
-                            color: AppTheme.textLightMuted, size: 18),
+                        Icon(Icons.info_outline_rounded,
+                            color: (Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Color(0xFF8E92A6)), size: 18),
                         const SizedBox(width: 8),
                         Text(
                           'ShopWave v1.0.0',
                           style: TextStyle(
-                            color: AppTheme.textLightMuted,
                             fontSize: 13,
                             
                           ),
@@ -348,7 +346,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         trailing: Icon(
           Icons.chevron_right_rounded,
-          color: AppTheme.textLightMuted,
           size: 20,
         ),
         onTap: onTap,
@@ -382,14 +379,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: Text(
           label,
           style: TextStyle(
-            color: AppTheme.textLightPrimary,
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),
         ),
         value: value,
         onChanged: onChanged,
-        activeColor: color,
+        activeThumbColor: color,
         activeTrackColor: color.withValues(alpha: 0.4),
       ),
     );

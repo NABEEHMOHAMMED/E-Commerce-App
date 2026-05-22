@@ -108,8 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bgLight,
-      appBar: AppBar(
+            appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
@@ -162,22 +161,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text(
+                      Text(
                         'Create Account',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: AppTheme.textLightPrimary,
+                          color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                           fontSize: 32,
                           fontWeight: FontWeight.w900,
                           letterSpacing: 0.5,
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      const Text(
+                      SizedBox(height: 8),
+                      Text(
                         'Join us and start shopping in a few easy steps!',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: AppTheme.textLightSecondary,
+                          color: (Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Color(0xFF5A5F7A)),
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),
@@ -202,8 +201,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextFormField(
                             controller: _nameController,
                             keyboardType: TextInputType.name,
-                            style: const TextStyle(
-                              color: AppTheme.textLightPrimary,
+                            style: TextStyle(
+                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                             ),
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
@@ -250,8 +249,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextFormField(
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
-                            style: const TextStyle(
-                              color: AppTheme.textLightPrimary,
+                            style: TextStyle(
+                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                             ),
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
@@ -301,8 +300,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextFormField(
                             controller: _passwordController,
                             obscureText: _obscurePassword,
-                            style: const TextStyle(
-                              color: AppTheme.textLightPrimary,
+                            style: TextStyle(
+                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                             ),
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
@@ -321,7 +320,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   _obscurePassword
                                       ? Icons.visibility_off_outlined
                                       : Icons.visibility_outlined,
-                                  color: AppTheme.textLightMuted,
                                 ),
                                 onPressed: () {
                                   setState(
@@ -362,8 +360,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextFormField(
                             controller: _confirmPasswordController,
                             obscureText: _obscureConfirmPassword,
-                            style: const TextStyle(
-                              color: AppTheme.textLightPrimary,
+                            style: TextStyle(
+                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                             ),
                             decoration: InputDecoration(
                               prefixIcon: const Icon(
@@ -382,7 +380,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   _obscureConfirmPassword
                                       ? Icons.visibility_off_outlined
                                       : Icons.visibility_outlined,
-                                  color: AppTheme.textLightMuted,
                                 ),
                                 onPressed: () {
                                   setState(
@@ -454,16 +451,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ),
 
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24),
 
                       // Back to Login Link
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             'Already have an account? ',
                             style: TextStyle(
-                              color: AppTheme.textLightSecondary,
+                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Color(0xFF5A5F7A)),
                               fontSize: 14,
                             ),
                           ),

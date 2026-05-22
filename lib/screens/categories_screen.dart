@@ -12,8 +12,7 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bgLight,
-      appBar: AppBar(
+            appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
@@ -37,10 +36,12 @@ class CategoriesScreen extends StatelessWidget {
             ),
           ),
         ),
-        title: const Text(
+        title: Text(
           'Categories',
           style: TextStyle(
-            color: AppTheme.textLightPrimary,
+            color: (Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Color(0xFF1A1D2E)),
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -81,13 +82,17 @@ class CategoriesScreen extends StatelessWidget {
                     color: AppTheme.primaryPurple,
                     size: 22,
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Search categories...',
                         hintStyle: TextStyle(
-                          color: AppTheme.textLightMuted.withValues(alpha: 0.6),
+                          color:
+                              (Theme.of(context).brightness == Brightness.dark
+                                      ? Colors.white54
+                                      : const Color(0xFF8E92A6))
+                                  .withValues(alpha: 0.6),
                           fontSize: 14,
                         ),
                         border: InputBorder.none,
@@ -98,8 +103,10 @@ class CategoriesScreen extends StatelessWidget {
                         isDense: true,
                         contentPadding: EdgeInsets.zero,
                       ),
-                      style: const TextStyle(
-                        color: AppTheme.textLightPrimary,
+                      style: TextStyle(
+                        color: (Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Color(0xFF1A1D2E)),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
@@ -121,10 +128,12 @@ class CategoriesScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   'All Categories',
                   style: TextStyle(
-                    color: AppTheme.textLightPrimary,
+                    color: (Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Color(0xFF1A1D2E)),
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -277,14 +286,16 @@ class _CategoryCard extends StatelessWidget {
               ),
               child: Icon(icon, color: color, size: 24),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               category.name,
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: AppTheme.textLightPrimary,
+                color: (Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : const Color(0xFF1A1D2E)),
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
               ),

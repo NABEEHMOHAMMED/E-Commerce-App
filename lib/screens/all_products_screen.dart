@@ -17,8 +17,7 @@ class AllProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bgLight,
-      appBar: AppBar(
+            appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
@@ -29,14 +28,14 @@ class AllProductsScreen extends StatelessWidget {
               color: AppTheme.bgLightSurface,
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.arrow_back_ios_new_rounded,
+            child: Icon(Icons.arrow_back_ios_new_rounded,
                 color: Colors.black, size: 18),
           ),
         ),
         title: Text(
           title,
-          style: const TextStyle(
-            color: AppTheme.textLightPrimary,
+          style: TextStyle(
+            color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -82,14 +81,14 @@ class AllProductsScreen extends StatelessWidget {
                       gradient: AppTheme.primaryGradient,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.search_off_rounded,
+                    child: Icon(Icons.search_off_rounded,
                         size: 48, color: Colors.white),
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
+                  SizedBox(height: 16),
+                  Text(
                     'No products found',
                     style: TextStyle(
-                      color: AppTheme.textLightPrimary,
+                      color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),
@@ -101,7 +100,6 @@ class AllProductsScreen extends StatelessWidget {
                       'No products match your search criteria.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: AppTheme.textLightMuted,
                         fontSize: 13,
                       ),
                     ),

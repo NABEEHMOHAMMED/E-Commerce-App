@@ -34,11 +34,10 @@ class HomeScreen extends StatelessWidget {
         final selectedIndex = navProvider.selectedIndex;
 
         return Scaffold(
-          backgroundColor: AppTheme.bgLight,
           body: _screens[selectedIndex],
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.06),
@@ -404,11 +403,11 @@ class MainHomeScreen extends StatelessWidget {
                               strokeWidth: 3,
                             ),
                           ),
-                          const SizedBox(height: 16),
-                          const Text(
+                          SizedBox(height: 16),
+                          Text(
                             'Loading products...',
                             style: TextStyle(
-                              color: AppTheme.textLightMuted,
+                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Color(0xFF8E92A6)),
                               fontSize: 14,
                             ),
                           ),
@@ -437,12 +436,12 @@ class MainHomeScreen extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           Text(
                             productProvider.errorMessage ?? 'No products found',
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: AppTheme.textLightPrimary,
+                            style: TextStyle(
+                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -454,7 +453,6 @@ class MainHomeScreen extends StatelessWidget {
                               'Something went wrong. Please try again.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: AppTheme.textLightMuted,
                                 fontSize: 13,
                               ),
                             ),
@@ -597,11 +595,11 @@ class MainHomeScreen extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(width: 8),
-                                  const Text(
+                                  SizedBox(width: 8),
+                                  Text(
                                     'Deals',
                                     style: TextStyle(
-                                      color: AppTheme.textLightPrimary,
+                                      color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -612,7 +610,6 @@ class MainHomeScreen extends StatelessWidget {
                               Text(
                                 'Exclusive offers just for you',
                                 style: TextStyle(
-                                  color: AppTheme.textLightMuted,
                                   fontSize: 12,
                                 ),
                               ),
@@ -729,11 +726,11 @@ class MainHomeScreen extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(width: 8),
-                                  const Text(
+                                  SizedBox(width: 8),
+                                  Text(
                                     'Trending',
                                     style: TextStyle(
-                                      color: AppTheme.textLightPrimary,
+                                      color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -744,7 +741,6 @@ class MainHomeScreen extends StatelessWidget {
                               Text(
                                 'Most popular picks right now',
                                 style: TextStyle(
-                                  color: AppTheme.textLightMuted,
                                   fontSize: 12,
                                 ),
                               ),
@@ -832,10 +828,10 @@ class MainHomeScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Quick Categories',
                             style: TextStyle(
-                              color: AppTheme.textLightPrimary,
+                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),

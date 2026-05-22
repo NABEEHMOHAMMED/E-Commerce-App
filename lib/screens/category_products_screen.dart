@@ -1,8 +1,8 @@
+import '../theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/category.dart';
 import '../providers/product_provider.dart';
-import '../theme/app_theme.dart';
 import '../widgets/product_card.dart';
 import 'product_detail_screen.dart';
 
@@ -14,8 +14,7 @@ class CategoryProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bgLight,
-      appBar: AppBar(
+            appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
@@ -35,8 +34,8 @@ class CategoryProductsScreen extends StatelessWidget {
         ),
         title: Text(
           category.name,
-          style: const TextStyle(
-            color: AppTheme.textLightPrimary,
+          style: TextStyle(
+            color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -54,12 +53,12 @@ class CategoryProductsScreen extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.grid_view_rounded,
-                    color: AppTheme.textLightMuted,
+                    color: (Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Color(0xFF8E92A6)),
                     size: 16,
                   ),
-                  const SizedBox(width: 4),
+                  SizedBox(width: 4),
                   Consumer<ProductProvider>(
                     builder: (_, provider, _) {
                       final count = provider
@@ -67,8 +66,8 @@ class CategoryProductsScreen extends StatelessWidget {
                           .length;
                       return Text(
                         '$count',
-                        style: const TextStyle(
-                          color: AppTheme.textLightPrimary,
+                        style: TextStyle(
+                          color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
                         ),
@@ -99,23 +98,22 @@ class CategoryProductsScreen extends StatelessWidget {
                     child: Icon(
                       Icons.inventory_2_outlined,
                       size: 50,
-                      color: AppTheme.textLightMuted,
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
+                  SizedBox(height: 16),
+                  Text(
                     'No products found',
                     style: TextStyle(
-                      color: AppTheme.textLightPrimary,
+                      color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
                   Text(
                     'No products in ${category.name} category yet.',
-                    style: const TextStyle(
-                      color: AppTheme.textLightMuted,
+                    style: TextStyle(
+                      color: (Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Color(0xFF8E92A6)),
                       fontSize: 13,
                     ),
                   ),
