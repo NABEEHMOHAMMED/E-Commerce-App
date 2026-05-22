@@ -13,12 +13,13 @@ Powered by **Provider** for clean state management and integrated deeply with **
 *   **Secure Multi-User Authentication:** Integrated with **Firebase Authentication** supporting real-time validation for SignUp and SignIn. Secure session state is actively tracked at the root level using a reactive `StreamBuilder`.
 *   **Real-time Database Syncing:** Product lists, categories, and inventories are streamed live from **Cloud Firestore** using `snapshots()`. This ensures that price changes, discounts, and inventory counts are updated instantly across all devices.
 *   **User-Specific Cloud Favorites (Exercise 3):** Wishlist items are isolated securely in the cloud under `users/{userId}/favorites`. Changes are managed through `set()`, `update()`, and `delete()`, synced in real-time, and supported by Firestore's offline cache.
-*   **Isolated Local Shopping Cart:** Shopping cart items are stored dynamically on a per-user basis. By listening to auth changes, the cart writes and reads from unique `cart_{userId}.json` files on local storage, preventing other users on the same device from seeing your items.
-*   **Automatic Cloud Database Seeding:** Built-in smart seeder that automatically populates the remote database with 10 high-quality products (images, prices, ratings, and time-left counts) upon first startup if Firestore is empty.
+*   **Offline Shopping Cart (SQLite - Exercise 4):** Shopping cart items are now persisted locally using **sqflite**. By listening to auth changes, the cart isolates data on a per-user basis within a local SQLite database (`cart_items` table), ensuring items remain even after closing the app or device restart.
+*   **Persistent Theme Management (Exercise 4):** Integrated a system-wide Theme management system using **shared_preferences**. Users can toggle between Light and Dark modes in their profile, and the preference is saved locally for future sessions.
+*   **Automatic Cloud Database Seeding:** Built-in smart seeder that automatically populates the remote database with high-quality products upon first startup if Firestore is empty.
 *   **Cohesive Premium UI & Navigation:** 
-    *   Dynamic background profile loading that updates and reloads the authenticated user's credentials in real-time.
-    *   System-wide theme-aware transparent inputs to eliminate unsightly black bounding boxes inside Search and Coupon fields under Dark Mode.
-    *   Stateful global tab indices that automatically reset to `0` (Home screen) on login, signup, and logout to guarantee a fresh experience.
+    *   Dynamic background profile loading that updates and reloads credentials in real-time.
+    *   System-wide theme-aware components that automatically adapt gradients, text colors, and backgrounds based on the selected mode.
+    *   Stateful global tab indices that automatically reset to `0` (Home screen) on session changes.
 
 ---
 
@@ -27,21 +28,22 @@ Powered by **Provider** for clean state management and integrated deeply with **
 ```mermaid
 graph TD
     User[📱 App Client] -->|FirebaseAuth| Auth[🔑 Firebase Auth]
-    Auth -->|Active Session UID| UI[🔄 AuthWrapper / NavigationState]
+    Auth -->|Active UID| UI[🔄 AuthWrapper / NavigationState]
     
     UI -->|If Authenticated| Home[🏠 HomeScreen]
     UI -->|If Unauthenticated| Login[🔐 SignIn / SignUp]
     
     Home -->|Snapshots Stream| DB[(☁️ Firestore: products collection)]
     Home -->|Isolate per UID| Favs[(☁️ Firestore: users/uid/favorites)]
-    Home -->|Isolate per UID| Cart[(💾 Local Disk: cart_uid.json)]
+    Home -->|Isolate per UID| Cart[(💾 Local SQLite: cart.db)]
+    Home -->|Theme State| Prefs[(💾 Local Prefs: theme_mode)]
 ```
 
 ---
 
 ## 🛠️ State Management Architecture
 
-E-Commerce Application utilizes the **Provider** design pattern to decouple UI presentation from business logic. The application is initialized under a global `MultiProvider` tree to make states globally accessible yet highly responsive:
+E-Commerce Application utilizes the **Provider** design pattern to decouple UI presentation from business logic. The application is initialized under a global `MultiProvider` tree:
 
 ```dart
 MultiProvider(
@@ -50,38 +52,43 @@ MultiProvider(
     ChangeNotifierProvider(create: (_) => CartProvider()),
     ChangeNotifierProvider(create: (_) => FavoriteProvider()),
     ChangeNotifierProvider(create: (_) => NavigationProvider()),
+    ChangeNotifierProvider(create: (_) => ThemeProvider()), // Persistence added
   ],
   child: const MyApp(),
 );
 ```
 
 ### State Components
-1.  **ProductProvider:** Streams live inventory data from Firestore, handles caching fallbacks, and executes background synchronization and database seeding.
-2.  **CartProvider:** Implements shopping cart logic, counts quantities, handles subtotals, listens to authentication changes to switch local files (`cart_{userId}.json`), and wipes memory data cleanly on sign-out.
-3.  **FavoriteProvider:** Listens to authentication state changes to dynamically subscribe/unsubscribe to the live user-specific cloud stream (`users/{userId}/favorites`). Handles secure additions (`set()`) and deletions (`delete()`).
-4.  **NavigationProvider:** Manages active tab indices, provides unified triggers (`goHome()`), and resets active screens during session state changes to keep navigation clean.
+1.  **ProductProvider:** Streams live inventory data from Firestore, handles caching fallbacks, and executes background synchronization.
+2.  **CartProvider:** Implements shopping cart logic using **sqflite**. It isolates cart items by `userId` to ensure privacy and persists them across app restarts.
+3.  **FavoriteProvider:** Listens to authentication state changes to dynamically subscribe/unsubscribe to the live user-specific cloud stream (`users/{userId}/favorites`).
+4.  **ThemeProvider:** Manages the application's `ThemeMode` (Light/Dark/System). Uses **shared_preferences** to persist the user's choice locally.
+5.  **NavigationProvider:** Manages active tab indices and provides unified triggers for screen transitions.
 
 ---
 
 ## 🎓 Executed Laboratories & Exercises
 
 ### 🏆 Exercise 1 — Connect Your App to Firebase
-*   Configured Firebase Core and connected the Android codebase natively using `flutterfire configure`.
-*   Enabled Email/Password Sign-In methods inside the Firebase Console.
-*   Built the premium `SignInScreen` and `SignUpScreen` with comprehensive form validators.
-*   Implemented `AuthWrapper` at the entry point using `StreamBuilder` to dynamically switch view states based on `authStateChanges()`.
+*   Configured Firebase Core and enabled Email/Password Sign-In methods.
+*   Built premium `SignInScreen` and `SignUpScreen` with form validators.
+*   Implemented `AuthWrapper` using `StreamBuilder` for dynamic session state switching.
 
 ### 🏆 Exercise 2 — Move Data to Cloud Database
-*   Migrated the local mock data setup to a fully cloud-backed architecture using **Cloud Firestore**.
-*   Built robust serialization mappers `Product.fromDoc()` and `Product.toMap()` to marshal Firestore document documents.
-*   Implemented automated database seeding inside the initialization lifecycle of `ProductProvider` to self-populate remote Firestore if empty.
-*   Configured security rules on Cloud Firestore to allow seamless read/write access.
+*   Migrated mock data setup to a fully cloud-backed architecture using **Cloud Firestore**.
+*   Built robust serialization mappers `Product.fromDoc()` and `Product.toMap()`.
+*   Implemented automated database seeding inside `ProductProvider`.
 
 ### 🏆 Exercise 3 — Personal Favorites with Firebase
-*   Created isolated subcollections for user favorites in Cloud Firestore (`users/{userId}/favorites`).
-*   Configured `snapshots()` on `FavoriteProvider` to stream live updates and dynamically notify rebuilding consumers across the UI.
-*   Replaced local offline file manipulation with cloud-native `set()` and `delete()` Firestore transactions.
-*   Leveraged Firestore's native cache to support full offline availability out-of-the-box.
+*   Created isolated subcollections for user favorites (`users/{userId}/favorites`).
+*   Configured `snapshots()` on `FavoriteProvider` to stream live updates.
+*   Leveraged Firestore's native cache for offline availability.
+
+### 🏆 Exercise 4 — Local Persistence
+*   **SQFlite Integration:** Replaced JSON file persistence with a structured SQLite database for the shopping cart.
+*   **Data Isolation:** Implemented logic to filter cart items by the active `userId`.
+*   **Shared Preferences:** Implemented theme persistence to remember user appearance settings.
+*   **Dynamic Theme Refactoring:** Updated the entire UI layer to use `Theme.of(context)` for automatic adaptation to Dark/Light modes.
 
 ---
 
@@ -90,6 +97,7 @@ MultiProvider(
 *   **Framework:** Flutter (Dart)
 *   **State Management:** Provider
 *   **Authentication:** Firebase Auth
-*   **Database:** Cloud Firestore
-*   **Device Context:** Connectivity Plus (Internet detection & Fallbacks)
-*   **Design Tokens:** Google Fonts (Outfit, Inter), Custom HSL Palette, Linear Gradients, Glassmorphism Cards.
+*   **Database (Cloud):** Cloud Firestore
+*   **Database (Local):** SQFlite (sqflite)
+*   **Local Settings:** SharedPreferences
+*   **Design Tokens:** Google Fonts (Outfit, Inter), Dynamic Theme Support, Glassmorphism.
