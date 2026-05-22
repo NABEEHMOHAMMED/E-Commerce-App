@@ -58,7 +58,7 @@ class CategoryCard extends StatelessWidget {
                 ),
                 child: Text(
                   category.icon,
-                  style: const TextStyle(fontSize: 36),
+                  style: TextStyle(fontSize: 36),
                 ),
               ),
               SizedBox(height: 12),
@@ -73,7 +73,7 @@ class CategoryCard extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 6),
+              SizedBox(height: 6),
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,

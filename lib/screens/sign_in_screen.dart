@@ -156,9 +156,9 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                             ],
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.shopping_bag_rounded,
-                            color: Colors.white,
+                            color: Theme.of(context).cardColor,
                             size: 48,
                           ),
                         ),
@@ -193,12 +193,12 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 36),
+                      SizedBox(height: 36),
 
                       // Email Field Card
                       Card(
                         elevation: 0,
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
@@ -248,12 +248,12 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
 
                       // Password Field Card
                       Card(
                         elevation: 0,
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(

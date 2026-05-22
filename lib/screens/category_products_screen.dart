@@ -15,7 +15,7 @@ class CategoryProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
             appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
         leading: GestureDetector(
           onTap: () => Navigator.of(context).pop(),
@@ -25,7 +25,7 @@ class CategoryProductsScreen extends StatelessWidget {
               color: AppTheme.bgLightSurface,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back_ios_new_rounded,
               color: Colors.black,
               size: 18,

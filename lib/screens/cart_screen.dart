@@ -12,7 +12,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
             appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
@@ -28,7 +28,7 @@ class CartScreen extends StatelessWidget {
               color: AppTheme.bgLightSurface,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back_ios_new_rounded,
               color: Colors.black,
               size: 18,
@@ -97,9 +97,9 @@ class CartScreen extends StatelessWidget {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: AppTheme.neonRed,
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'Clear All',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: Theme.of(context).cardColor),
                                   ),
                                 ),
                               ],
@@ -138,8 +138,8 @@ class CartScreen extends StatelessWidget {
               return Container(
                 width: double.infinity,
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(24),
                   ),
@@ -154,9 +154,9 @@ class CartScreen extends StatelessWidget {
                             gradient: AppTheme.primaryGradient,
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.shopping_cart_rounded,
-                            color: Colors.white,
+                            color: Theme.of(context).cardColor,
                             size: 24,
                           ),
                         ),
@@ -215,7 +215,7 @@ class CartScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     // ─── Discount Code ───────────────────
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -316,9 +316,9 @@ class CartScreen extends StatelessWidget {
                           color: AppTheme.neonRed,
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.delete_outline_rounded,
-                          color: Colors.white,
+                          color: Theme.of(context).cardColor,
                           size: 24,
                         ),
                       ),
@@ -338,12 +338,12 @@ class CartScreen extends StatelessWidget {
           // ─── Checkout Section ──────────────────────────
           Consumer<CartProvider>(
             builder: (ctx, cart, _) {
-              if (cart.items.isEmpty) return const SizedBox.shrink();
+              if (cart.items.isEmpty) return SizedBox.shrink();
 
               return Container(
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                   boxShadow: [
                     BoxShadow(
@@ -485,17 +485,17 @@ class CartScreen extends StatelessWidget {
                 fontSize: 13,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               decoration: BoxDecoration(
                 gradient: AppTheme.primaryGradient,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Text(
+              child: Text(
                 'Start Shopping',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
                 ),
@@ -510,7 +510,7 @@ class CartScreen extends StatelessWidget {
   Widget _buildOrderDialog(BuildContext context, CartProvider cart) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -522,7 +522,7 @@ class CartScreen extends StatelessWidget {
                 color: AppTheme.primaryPurple.withValues(alpha: 0.08),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.check_circle_rounded,
                 color: AppTheme.primaryPurple,
                 size: 40,

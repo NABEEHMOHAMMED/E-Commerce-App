@@ -18,7 +18,7 @@ class AllProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
             appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
         leading: GestureDetector(
           onTap: () => Navigator.of(context).pop(),
@@ -82,7 +82,7 @@ class AllProductsScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: Icon(Icons.search_off_rounded,
-                        size: 48, color: Colors.white),
+                        size: 48, color: Theme.of(context).cardColor),
                   ),
                   SizedBox(height: 16),
                   Text(

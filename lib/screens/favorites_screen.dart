@@ -14,7 +14,7 @@ class FavoritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
             appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
@@ -30,7 +30,7 @@ class FavoritesScreen extends StatelessWidget {
               color: AppTheme.bgLightSurface,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
+            child: Icon(
               Icons.arrow_back_ios_new_rounded,
               color: Colors.black,
               size: 18,
@@ -69,7 +69,7 @@ class FavoritesScreen extends StatelessWidget {
       body: Consumer<FavoriteProvider>(
         builder: (ctx, favoriteProvider, _) {
           if (favoriteProvider.favorites.isEmpty) {
-            return _buildEmptyFavorites();
+            return _buildEmptyFavorites(context);
           }
           return Column(
             children: [
@@ -77,8 +77,8 @@ class FavoritesScreen extends StatelessWidget {
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(24),
                   ),
@@ -91,9 +91,9 @@ class FavoritesScreen extends StatelessWidget {
                         gradient: AppTheme.pinkGradient,
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.favorite_rounded,
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         size: 24,
                       ),
                     ),
@@ -182,7 +182,7 @@ class FavoritesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyFavorites() {
+  Widget _buildEmptyFavorites(BuildContext context) {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -190,7 +190,7 @@ class FavoritesScreen extends StatelessWidget {
           Container(
             width: 120,
             height: 120,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: AppTheme.pinkGradient,
               shape: BoxShape.circle,
             ),
@@ -205,7 +205,7 @@ class FavoritesScreen extends StatelessWidget {
             'No favorites yet',
             style: TextStyle(
               color:
-                  (Theme.of(context as BuildContext).brightness ==
+                  (Theme.of(context).brightness ==
                       Brightness.dark
                   ? Colors.white
                   : const Color(0xFF1A1D2E)),
@@ -221,7 +221,7 @@ class FavoritesScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color:
-                    (Theme.of(context as BuildContext).brightness ==
+                    (Theme.of(context).brightness ==
                         Brightness.dark
                     ? Colors.white54
                     : const Color(0xFF8E92A6)),

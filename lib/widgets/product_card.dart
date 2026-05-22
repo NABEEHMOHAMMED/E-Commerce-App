@@ -15,7 +15,7 @@ class ProductCard extends StatelessWidget {
     return Container(
       width: 170,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -86,8 +86,8 @@ class ProductCard extends StatelessWidget {
                       ),
                       child: Text(
                         '-${product.discountPercentage}%',
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: Theme.of(context).cardColor,
                           fontSize: 9,
                           fontWeight: FontWeight.w800,
                         ),
@@ -106,7 +106,7 @@ class ProductCard extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.9),
+                            color: Theme.of(context).cardColor.withValues(alpha: 0.9),
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(

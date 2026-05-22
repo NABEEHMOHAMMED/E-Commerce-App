@@ -57,8 +57,8 @@ class ProductDetailScreen extends StatelessWidget {
                   product.name.length > 25
                       ? '${product.name.substring(0, 25)}...'
                       : product.name,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: Theme.of(context).cardColor,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),
@@ -136,8 +136,8 @@ class ProductDetailScreen extends StatelessWidget {
                         ),
                         child: Text(
                           '-${product.discountPercentage}% OFF',
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: Theme.of(context).cardColor,
                             fontSize: 13,
                             fontWeight: FontWeight.w800,
                           ),
@@ -151,7 +151,7 @@ class ProductDetailScreen extends StatelessWidget {
               preferredSize: const Size.fromHeight(1),
               child: Container(
                 height: 1,
-                color: Colors.white.withValues(alpha: 0.1),
+                color: Theme.of(context).cardColor.withValues(alpha: 0.1),
               ),
             ),
           ),
@@ -174,10 +174,10 @@ class ProductDetailScreen extends StatelessWidget {
                       gradient: AppTheme.primaryGradient,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Free Shipping',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
                       ),
@@ -205,8 +205,8 @@ class ProductDetailScreen extends StatelessWidget {
                     spacing: 12,
                     runSpacing: 8,
                     children: [
-                      _buildRatingChip(),
-                      _buildTimeChip(),
+                      _buildRatingChip(context),
+                      _buildTimeChip(context),
                       _buildShareButton(context),
                     ],
                   ),
@@ -218,7 +218,7 @@ class ProductDetailScreen extends StatelessWidget {
 
                   // Divider
                   const Divider(color: AppTheme.bgLightSurface, thickness: 1),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
 
                   // Description Section
                   Column(
@@ -269,7 +269,7 @@ class ProductDetailScreen extends StatelessWidget {
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
@@ -299,7 +299,7 @@ class ProductDetailScreen extends StatelessWidget {
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
@@ -314,7 +314,7 @@ class ProductDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRatingChip() {
+  Widget _buildRatingChip(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
@@ -339,7 +339,7 @@ class ProductDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTimeChip() {
+  Widget _buildTimeChip(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
@@ -505,7 +505,7 @@ class ProductDetailScreen extends StatelessWidget {
                       );
                     },
                     icon: const Icon(Icons.shopping_cart_rounded, size: 20),
-                    label: const Text(
+                    label: Text(
                       'Add to Cart',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,

@@ -178,18 +178,18 @@ class HomeScreen extends StatelessWidget {
       'Cart',
       badge: Consumer<CartProvider>(
         builder: (ctx, cart, _) {
-          if (cart.itemCount == 0) return const SizedBox.shrink();
+          if (cart.itemCount == 0) return SizedBox.shrink();
           return Container(
             padding: const EdgeInsets.all(4),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: AppTheme.neonRed,
               shape: BoxShape.circle,
             ),
             constraints: const BoxConstraints(minWidth: 14, minHeight: 14),
             child: Text(
               '${cart.itemCount}',
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: Theme.of(context).cardColor,
                 fontSize: 8,
                 fontWeight: FontWeight.bold,
               ),
@@ -211,18 +211,18 @@ class HomeScreen extends StatelessWidget {
       'Favorites',
       badge: Consumer<FavoriteProvider>(
         builder: (ctx, favs, _) {
-          if (favs.favorites.isEmpty) return const SizedBox.shrink();
+          if (favs.favorites.isEmpty) return SizedBox.shrink();
           return Container(
             padding: const EdgeInsets.all(4),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: AppTheme.neonRed,
               shape: BoxShape.circle,
             ),
             constraints: const BoxConstraints(minWidth: 14, minHeight: 14),
             child: Text(
               '${favs.favorites.length}',
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: Theme.of(context).cardColor,
                 fontSize: 8,
                 fontWeight: FontWeight.bold,
               ),
@@ -263,12 +263,12 @@ class MainHomeScreen extends StatelessWidget {
                   pinned: true,
                   backgroundColor: AppTheme.primaryPurple,
                   flexibleSpace: FlexibleSpaceBar(
-                    title: const Text(
+                    title: Text(
                       'ShopWave',
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         fontSize: 22,
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         letterSpacing: 1.2,
                       ),
                     ),
@@ -287,7 +287,7 @@ class MainHomeScreen extends StatelessWidget {
                               height: 200,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Colors.white.withValues(alpha: 0.08),
+                                color: Theme.of(context).cardColor.withValues(alpha: 0.08),
                               ),
                             ),
                           ),
@@ -299,7 +299,7 @@ class MainHomeScreen extends StatelessWidget {
                               height: 160,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Colors.white.withValues(alpha: 0.05),
+                                color: Theme.of(context).cardColor.withValues(alpha: 0.05),
                               ),
                             ),
                           ),
@@ -311,7 +311,7 @@ class MainHomeScreen extends StatelessWidget {
                     preferredSize: const Size.fromHeight(1),
                     child: Container(
                       height: 1,
-                      color: Colors.white.withValues(alpha: 0.2),
+                      color: Theme.of(context).cardColor.withValues(alpha: 0.2),
                     ),
                   ),
                 ),
@@ -351,23 +351,23 @@ class MainHomeScreen extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.all(6),
                             decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.2),
+                              color: Theme.of(context).cardColor.withValues(alpha: 0.2),
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
                               productProvider.isConnected
                                   ? Icons.warning_rounded
                                   : Icons.wifi_off_rounded,
-                              color: Colors.white,
+                              color: Theme.of(context).cardColor,
                               size: 18,
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          SizedBox(width: 10),
                           Expanded(
                             child: Text(
                               productProvider.errorMessage ?? '',
-                              style: const TextStyle(
-                                color: Colors.white,
+                              style: TextStyle(
+                                color: Theme.of(context).cardColor,
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -430,10 +430,10 @@ class MainHomeScreen extends StatelessWidget {
                               gradient: AppTheme.primaryGradient,
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.shopping_bag_outlined,
                               size: 50,
-                              color: Colors.white,
+                              color: Theme.of(context).cardColor,
                             ),
                           ),
                           SizedBox(height: 16),
@@ -495,10 +495,10 @@ class MainHomeScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
+                                  Text(
                                     'Grand Sale!',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: Theme.of(context).cardColor,
                                       fontSize: 20,
                                       fontWeight: FontWeight.w800,
                                     ),
@@ -512,12 +512,12 @@ class MainHomeScreen extends StatelessWidget {
                                       height: 1.5,
                                     ),
                                   ),
-                                  const SizedBox(height: 12),
+                                  SizedBox(height: 12),
                                   Container(
                                     height: 32,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Theme.of(context).cardColor,
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: const Center(
@@ -890,21 +890,21 @@ class MainHomeScreen extends StatelessWidget {
                                                   10,
                                                 ),
                                                 decoration: BoxDecoration(
-                                                  color: Colors.white
+                                                  color: Theme.of(context).cardColor
                                                       .withValues(alpha: 0.2),
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: Icon(
                                                   _categoryEmoji(cat.id),
                                                   size: 22,
-                                                  color: Colors.white,
+                                                  color: Theme.of(context).cardColor,
                                                 ),
                                               ),
-                                              const SizedBox(height: 6),
+                                              SizedBox(height: 6),
                                               Text(
                                                 cat.name,
-                                                style: const TextStyle(
-                                                  color: Colors.white,
+                                                style: TextStyle(
+                                                  color: Theme.of(context).cardColor,
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.w600,
                                                 ),

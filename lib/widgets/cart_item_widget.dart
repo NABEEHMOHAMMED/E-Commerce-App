@@ -54,7 +54,7 @@ class CartItemWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 14),
+          SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +110,7 @@ class CartItemWidget extends StatelessWidget {
                         topRight: Radius.circular(12),
                       ),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.add_rounded,
                       color: AppTheme.primaryPurple,
                       size: 16,
