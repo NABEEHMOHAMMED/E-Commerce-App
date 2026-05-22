@@ -25,12 +25,12 @@ class CartScreen extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppTheme.bgLightSurface,
+              color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
+              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
               size: 18,
             ),
           ),
@@ -99,7 +99,7 @@ class CartScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     'Clear All',
-                                    style: TextStyle(color: Theme.of(context).cardColor),
+                                    style: TextStyle(color: Colors.white),
                                   ),
                                 ),
                               ],
@@ -156,7 +156,7 @@ class CartScreen extends StatelessWidget {
                           ),
                           child: Icon(
                             Icons.shopping_cart_rounded,
-                            color: Theme.of(context).cardColor,
+                            color: Colors.white,
                             size: 24,
                           ),
                         ),
@@ -221,7 +221,7 @@ class CartScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 14),
                       height: 44,
                       decoration: BoxDecoration(
-                        color: AppTheme.bgLightSurface,
+                        color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
                         borderRadius: BorderRadius.circular(14),
                         border: Border.all(
                           color: Colors.grey.withValues(alpha: 0.1),
@@ -318,7 +318,7 @@ class CartScreen extends StatelessWidget {
                         ),
                         child: Icon(
                           Icons.delete_outline_rounded,
-                          color: Theme.of(context).cardColor,
+                          color: Colors.white,
                           size: 24,
                         ),
                       ),
@@ -362,7 +362,7 @@ class CartScreen extends StatelessWidget {
                         vertical: 14,
                       ),
                       decoration: BoxDecoration(
-                        color: AppTheme.bgLightSurface,
+                        color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Row(
@@ -452,7 +452,7 @@ class CartScreen extends StatelessWidget {
               width: 120,
               height: 120,
               decoration: BoxDecoration(
-                color: AppTheme.bgLightSurface,
+                color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -495,7 +495,7 @@ class CartScreen extends StatelessWidget {
               child: Text(
                 'Start Shopping',
                 style: TextStyle(
-                  color: Theme.of(context).cardColor,
+                  color: Colors.white,
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
                 ),

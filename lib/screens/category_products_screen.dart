@@ -22,12 +22,12 @@ class CategoryProductsScreen extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppTheme.bgLightSurface,
+              color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
+              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
               size: 18,
             ),
           ),
@@ -47,7 +47,7 @@ class CategoryProductsScreen extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               decoration: BoxDecoration(
-                color: AppTheme.bgLightSurface,
+                color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -92,7 +92,7 @@ class CategoryProductsScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: AppTheme.bgLightSurface,
+                      color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(

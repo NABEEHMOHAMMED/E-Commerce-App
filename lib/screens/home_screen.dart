@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.06),
+                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withValues(alpha: 0.06),
                   blurRadius: 20,
                   offset: const Offset(0, -6),
                 ),
@@ -189,7 +189,7 @@ class HomeScreen extends StatelessWidget {
             child: Text(
               '${cart.itemCount}',
               style: TextStyle(
-                color: Theme.of(context).cardColor,
+                color: Colors.white,
                 fontSize: 8,
                 fontWeight: FontWeight.bold,
               ),
@@ -222,7 +222,7 @@ class HomeScreen extends StatelessWidget {
             child: Text(
               '${favs.favorites.length}',
               style: TextStyle(
-                color: Theme.of(context).cardColor,
+                color: Colors.white,
                 fontSize: 8,
                 fontWeight: FontWeight.bold,
               ),
@@ -268,7 +268,7 @@ class MainHomeScreen extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         fontSize: 22,
-                        color: Theme.of(context).cardColor,
+                        color: Colors.white,
                         letterSpacing: 1.2,
                       ),
                     ),
@@ -287,7 +287,7 @@ class MainHomeScreen extends StatelessWidget {
                               height: 200,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Theme.of(context).cardColor.withValues(alpha: 0.08),
+                                color: Colors.white.withValues(alpha: 0.08),
                               ),
                             ),
                           ),
@@ -299,7 +299,7 @@ class MainHomeScreen extends StatelessWidget {
                               height: 160,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Theme.of(context).cardColor.withValues(alpha: 0.05),
+                                color: Colors.white.withValues(alpha: 0.05),
                               ),
                             ),
                           ),
@@ -311,7 +311,7 @@ class MainHomeScreen extends StatelessWidget {
                     preferredSize: const Size.fromHeight(1),
                     child: Container(
                       height: 1,
-                      color: Theme.of(context).cardColor.withValues(alpha: 0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                     ),
                   ),
                 ),
@@ -358,7 +358,7 @@ class MainHomeScreen extends StatelessWidget {
                               productProvider.isConnected
                                   ? Icons.warning_rounded
                                   : Icons.wifi_off_rounded,
-                              color: Theme.of(context).cardColor,
+                              color: Colors.white,
                               size: 18,
                             ),
                           ),
@@ -367,7 +367,7 @@ class MainHomeScreen extends StatelessWidget {
                             child: Text(
                               productProvider.errorMessage ?? '',
                               style: TextStyle(
-                                color: Theme.of(context).cardColor,
+                                color: Colors.white,
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -433,7 +433,7 @@ class MainHomeScreen extends StatelessWidget {
                             child: Icon(
                               Icons.shopping_bag_outlined,
                               size: 50,
-                              color: Theme.of(context).cardColor,
+                              color: Colors.white,
                             ),
                           ),
                           SizedBox(height: 16),
@@ -498,7 +498,7 @@ class MainHomeScreen extends StatelessWidget {
                                   Text(
                                     'Grand Sale!',
                                     style: TextStyle(
-                                      color: Theme.of(context).cardColor,
+                                      color: Colors.white,
                                       fontSize: 20,
                                       fontWeight: FontWeight.w800,
                                     ),
@@ -890,21 +890,20 @@ class MainHomeScreen extends StatelessWidget {
                                                   10,
                                                 ),
                                                 decoration: BoxDecoration(
-                                                  color: Theme.of(context).cardColor
-                                                      .withValues(alpha: 0.2),
+                                                  color: Theme.of(context).cardColor.withValues(alpha: 0.2),
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: Icon(
                                                   _categoryEmoji(cat.id),
                                                   size: 22,
-                                                  color: Theme.of(context).cardColor,
+                                                  color: Colors.white,
                                                 ),
                                               ),
                                               SizedBox(height: 6),
                                               Text(
                                                 cat.name,
                                                 style: TextStyle(
-                                                  color: Theme.of(context).cardColor,
+                                                  color: Colors.white,
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.w600,
                                                 ),

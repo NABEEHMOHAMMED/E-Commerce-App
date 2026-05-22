@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class CartDatabaseHelper {
   static final CartDatabaseHelper instance = CartDatabaseHelper._init();
@@ -34,6 +35,7 @@ class CartDatabaseHelper {
   }
 
   Future<List<Map<String, dynamic>>> query(String table, String? userId) async {
+    if (kIsWeb) return [];
     final db = await instance.database;
     if (userId != null) {
       return await db.query(table, where: 'userId = ?', whereArgs: [userId]);
@@ -43,11 +45,13 @@ class CartDatabaseHelper {
   }
 
   Future<int> insert(Map<String, dynamic> row) async {
+    if (kIsWeb) return 0;
     final db = await instance.database;
     return await db.insert('cart_items', row);
   }
 
   Future<int> update(Map<String, dynamic> row) async {
+    if (kIsWeb) return 0;
     final db = await instance.database;
     return await db.update(
       'cart_items',
@@ -58,6 +62,7 @@ class CartDatabaseHelper {
   }
 
   Future<int> delete(String id, String userId) async {
+    if (kIsWeb) return 0;
     final db = await instance.database;
     return await db.delete(
       'cart_items',
@@ -67,6 +72,7 @@ class CartDatabaseHelper {
   }
 
   Future<int> deleteAll(String userId) async {
+    if (kIsWeb) return 0;
     final db = await instance.database;
     return await db.delete(
       'cart_items',
@@ -76,6 +82,7 @@ class CartDatabaseHelper {
   }
 
   Future close() async {
+    if (kIsWeb) return;
     final db = await instance.database;
     db.close();
   }

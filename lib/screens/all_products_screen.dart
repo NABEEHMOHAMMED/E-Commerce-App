@@ -25,11 +25,11 @@ class AllProductsScreen extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppTheme.bgLightSurface,
+              color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
               shape: BoxShape.circle,
             ),
             child: Icon(Icons.arrow_back_ios_new_rounded,
-                color: Colors.black, size: 18),
+                color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black), size: 18),
           ),
         ),
         title: Text(
@@ -82,7 +82,7 @@ class AllProductsScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: Icon(Icons.search_off_rounded,
-                        size: 48, color: Theme.of(context).cardColor),
+                        size: 48, color: Colors.white),
                   ),
                   SizedBox(height: 16),
                   Text(

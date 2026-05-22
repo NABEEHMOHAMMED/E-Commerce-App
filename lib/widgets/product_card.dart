@@ -19,7 +19,11 @@ class ProductCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color:
+                (Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black)
+                    .withValues(alpha: 0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -46,7 +50,9 @@ class ProductCard extends StatelessWidget {
                       fit: BoxFit.cover,
                       memCacheHeight: 300,
                       placeholder: (context, url) => Container(
-                        color: AppTheme.bgLightSurface,
+                        color: (Theme.of(context).brightness == Brightness.dark
+                            ? Color(0xFF1E1E38)
+                            : AppTheme.bgLightSurface),
                         child: const Center(
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
@@ -57,10 +63,15 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
                       errorWidget: (context, url, error) => Container(
-                        color: AppTheme.bgLightSurface,
+                        color: (Theme.of(context).brightness == Brightness.dark
+                            ? Color(0xFF1E1E38)
+                            : AppTheme.bgLightSurface),
                         child: Icon(
                           Icons.image_not_supported,
-                          color: (Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Color(0xFF8E92A6)),
+                          color:
+                              (Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white54
+                              : Color(0xFF8E92A6)),
                         ),
                       ),
                     ),
@@ -87,7 +98,7 @@ class ProductCard extends StatelessWidget {
                       child: Text(
                         '-${product.discountPercentage}%',
                         style: TextStyle(
-                          color: Theme.of(context).cardColor,
+                          color: Colors.white,
                           fontSize: 9,
                           fontWeight: FontWeight.w800,
                         ),
@@ -106,7 +117,9 @@ class ProductCard extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).cardColor.withValues(alpha: 0.9),
+                            color: Theme.of(
+                              context,
+                            ).cardColor.withValues(alpha: 0.9),
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
@@ -160,7 +173,10 @@ class ProductCard extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
+                          color:
+                              (Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Color(0xFF1A1D2E)),
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           height: 1.2,
@@ -198,7 +214,11 @@ class ProductCard extends StatelessWidget {
                           Text(
                             '\$${product.price.toStringAsFixed(1)}',
                             style: TextStyle(
-                              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
+                              color:
+                                  (Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Color(0xFF1A1D2E)),
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
@@ -209,7 +229,11 @@ class ProductCard extends StatelessWidget {
                               child: Text(
                                 '\$${product.oldPrice!.toStringAsFixed(1)}',
                                 style: TextStyle(
-                                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.white54 : Color(0xFF8E92A6)),
+                                  color:
+                                      (Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white54
+                                      : Color(0xFF8E92A6)),
                                   fontSize: 9,
                                   decoration: TextDecoration.lineThrough,
                                 ),
@@ -229,7 +253,11 @@ class ProductCard extends StatelessWidget {
                               Text(
                                 '${product.rating}',
                                 style: TextStyle(
-                                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Color(0xFF1A1D2E)),
+                                  color:
+                                      (Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white
+                                      : Color(0xFF1A1D2E)),
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -261,7 +289,7 @@ class ProductCard extends StatelessWidget {
       'furniture': Color(0xFF8E44AD),
       'beauty': Color(0xFFF06292),
       'toys': Color(0xFFFF9F43),
-      'gaming': Color(0xFF2C3E50),
+      'gaming': Color.fromARGB(255, 64, 129, 193),
       'accessories': Color(0xFF16A085),
       'sports': Color(0xFF27AE60),
       'groceries': Color(0xFFF39C12),

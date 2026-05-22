@@ -67,10 +67,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 90,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: Theme.of(context).cardColor, width: 3),
+                      border: Border.all(color: Colors.white, width: 3),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.2),
+                          color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withValues(alpha: 0.2),
                           blurRadius: 16,
                           offset: const Offset(0, 6),
                         ),
@@ -83,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       child: Icon(
                         Icons.person_rounded,
-                        color: Theme.of(context).cardColor,
+                        color: Colors.white,
                         size: 44,
                       ),
                     ),
@@ -92,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Text(
                     user?.displayName?.toUpperCase() ?? 'GUEST USER',
                     style: TextStyle(
-                      color: Theme.of(context).cardColor,
+                      color: Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.5,
@@ -102,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Text(
                     user?.email ?? 'guest@shopwave.com',
                     style: TextStyle(
-                      color: Theme.of(context).cardColor.withValues(alpha: 0.8),
+                      color: Colors.white.withValues(alpha: 0.8),
                       fontSize: 13,
                     ),
                   ),
@@ -246,7 +246,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     decoration: BoxDecoration(
-                      color: AppTheme.bgLightSurface,
+                      color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
@@ -282,7 +282,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Text(
             value,
             style: TextStyle(
-              color: Theme.of(context).cardColor,
+              color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               
@@ -306,7 +306,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Container(
       width: 1,
       height: 30,
-      color: Theme.of(context).cardColor.withValues(alpha: 0.2),
+      color: Colors.white.withValues(alpha: 0.2),
     );
   }
 
@@ -338,7 +338,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: Text(
           label,
           style: TextStyle(
-            color: isDestructive ? color : AppTheme.textLightPrimary,
+            color: isDestructive ? color : Theme.of(context).colorScheme.onSurface,
             fontSize: 14,
             fontWeight: FontWeight.w500,
             

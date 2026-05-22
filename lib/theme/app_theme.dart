@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // ─── Light Theme Colors ────────────────────────────────────────────
-  static const Color bgLight = Color(0xFFF8F9FD);
-  static const Color bgLightSurface = Color(0xFFF0F2F8);
-  static const Color textLightPrimary = Color(0xFF1A1D2E);
-  static const Color textLightSecondary = Color(0xFF5A5F7A);
-  static const Color textLightMuted = Color(0xFF8E92A6);
+  // Light theme
+  static const Color bgLight = Colors.white;
+  static const Color bgLightSurface = Color(0xFFF8F9FA);
+  static const Color textLightPrimary = Color(0xFF1E1E2C);
+  static const Color textLightMuted = Color(0xFF8A8A9E);
+  static const Color orangeAccent = Color(0xFFFF5722);
+  static const Color blueAccent = Color(0xFF2979FF);
 
-  // ─── Accent Colors ─────────────────────────────────────────────────
+  // ─── Missing Colors (Added to Fix Errors) ──────────────────────────
+
   static const Color primaryPurple = Color(0xFF6C5CE7);
   static const Color primaryBlue = Color(0xFF4A7CFF);
-  static const Color accentOrange = Color(0xFFFF6B35);
-  static const Color accentPink = Color(0xFFFF4B8D);
   static const Color accentTeal = Color(0xFF00BFA6);
-  static const Color accentYellow = Color(0xFFFFC547);
+  static const Color accentOrange = Color(0xFFFF5722);
+  static const Color accentPink = Color(0xFFFF4B8D);
+  static const Color textLightSecondary = Color(0xFF8A8A9E);
+  static const Color navInactive = Color(0xFF9E9E9E);
 
   // ─── Dark Theme Colors ─────────────────────────────────────────────
   static const Color bgDark = Color(0xFF0D0D1A);
@@ -69,7 +72,6 @@ class AppTheme {
   );
 
   // ─── Special Colors ────────────────────────────────────────────────
-  static const Color navInactive = Color(0xFF9E9E9E);
   static const Color successGreen = Color(0xFF00C853);
   static const Color warningAmber = Color(0xFFFFC107);
 
@@ -88,23 +90,13 @@ class AppTheme {
       tertiary: accentTeal,
       surface: bgCard,
       error: neonRed,
-      onSurface: Colors.white,
-    ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Colors.white),
-      bodyMedium: TextStyle(color: Colors.white70),
-      bodySmall: TextStyle(color: Colors.white54),
-      titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      titleMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-      titleSmall: TextStyle(color: Colors.white70),
-      labelLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-      labelMedium: TextStyle(color: Colors.white70),
+      onSurface:
+          Colors.white, // Added to guarantee text visibility in dark mode
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: bgCard,
+      backgroundColor: Colors.transparent,
       elevation: 0,
       centerTitle: true,
-      iconTheme: IconThemeData(color: Colors.white),
       titleTextStyle: TextStyle(
         fontWeight: FontWeight.w700,
         fontSize: 20,
@@ -134,17 +126,15 @@ class AppTheme {
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide.none,
       ),
-      hintStyle: const TextStyle(color: Colors.white38),
+      hintStyle: const TextStyle(color: textLightMuted),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: bgCard,
+      backgroundColor: bgCard, // Fixed to fit dark theme logic correctly
       selectedItemColor: primaryPurple,
       unselectedItemColor: navInactive,
       type: BottomNavigationBarType.fixed,
       elevation: 20,
     ),
-    dividerColor: Colors.white12,
-    iconTheme: const IconThemeData(color: Colors.white70),
   );
 
   static ThemeData get lightTheme => ThemeData(
@@ -157,26 +147,8 @@ class AppTheme {
       tertiary: accentTeal,
       surface: bgLightSurface,
       error: neonRed,
-      onSurface: textLightPrimary,
-    ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: textLightPrimary),
-      bodyMedium: TextStyle(color: textLightSecondary),
-      bodySmall: TextStyle(color: textLightMuted),
-      titleLarge: TextStyle(
-        color: textLightPrimary,
-        fontWeight: FontWeight.bold,
-      ),
-      titleMedium: TextStyle(
-        color: textLightPrimary,
-        fontWeight: FontWeight.w600,
-      ),
-      titleSmall: TextStyle(color: textLightSecondary),
-      labelLarge: TextStyle(
-        color: textLightPrimary,
-        fontWeight: FontWeight.w600,
-      ),
-      labelMedium: TextStyle(color: textLightSecondary),
+      onSurface:
+          textLightPrimary, // Added to guarantee text visibility in light mode
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
@@ -193,7 +165,7 @@ class AppTheme {
       color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 2,
-      shadowColor: Colors.black12,
+      shadowColor: Colors.black.withValues(alpha: 0.06),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -212,7 +184,5 @@ class AppTheme {
       type: BottomNavigationBarType.fixed,
       elevation: 20,
     ),
-    dividerColor: Colors.black12,
-    iconTheme: const IconThemeData(color: textLightSecondary),
   );
 }

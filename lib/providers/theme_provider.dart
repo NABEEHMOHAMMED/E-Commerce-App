@@ -2,49 +2,60 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  ThemeMode _themeMode = ThemeMode.system;
+  ThemeMode _themeMode = ThemeMode.light; // Default to light
 
   ThemeMode get themeMode => _themeMode;
 
   ThemeProvider() {
-    _loadTheme();
+    _loadThemeMode();
   }
 
-  Future<void> _loadTheme() async {
+  Future<void> _loadThemeMode() async {
     final prefs = await SharedPreferences.getInstance();
-    final themeString = prefs.getString('theme_mode');
-    
-    if (themeString == 'light') {
-      _themeMode = ThemeMode.light;
-    } else if (themeString == 'dark') {
-      _themeMode = ThemeMode.dark;
-    } else {
-      _themeMode = ThemeMode.system;
+    final String? themeModeName = prefs.getString('themeMode');
+    if (themeModeName != null) {
+      switch (themeModeName) {
+        case 'light':
+          _themeMode = ThemeMode.light;
+          break;
+        case 'dark':
+          _themeMode = ThemeMode.dark;
+          break;
+        case 'system':
+        default:
+          _themeMode = ThemeMode.system;
+      }
     }
     notifyListeners();
   }
 
   Future<void> setThemeMode(ThemeMode mode) async {
-    if (_themeMode == mode) return;
-    
     _themeMode = mode;
-    notifyListeners();
-
     final prefs = await SharedPreferences.getInstance();
-    String themeString = 'system';
-    if (mode == ThemeMode.light) {
-      themeString = 'light';
-    } else if (mode == ThemeMode.dark) {
-      themeString = 'dark';
+    String themeModeName;
+    switch (mode) {
+      case ThemeMode.light:
+        themeModeName = 'light';
+        break;
+      case ThemeMode.dark:
+        themeModeName = 'dark';
+        break;
+      case ThemeMode.system:
+        themeModeName = 'system';
+        break;
     }
-    await prefs.setString('theme_mode', themeString);
+    await prefs.setString('themeMode', themeModeName);
+    notifyListeners();
   }
-  
-  void toggleTheme() {
-    if (_themeMode == ThemeMode.light || _themeMode == ThemeMode.system) {
-       setThemeMode(ThemeMode.dark);
+
+  Future<void> toggleTheme() async {
+    if (_themeMode == ThemeMode.light) {
+      await setThemeMode(ThemeMode.dark);
+    } else if (_themeMode == ThemeMode.dark) {
+      await setThemeMode(ThemeMode.light);
     } else {
-       setThemeMode(ThemeMode.light);
+      // If system, we toggle to light for simplicity (or could check system preference)
+      await setThemeMode(ThemeMode.light);
     }
   }
 }

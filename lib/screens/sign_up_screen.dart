@@ -112,9 +112,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_new_rounded,
-            color: Colors.black,
+            color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
@@ -186,11 +186,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Name Field Card
                       Card(
                         elevation: 0,
-                        color: Theme.of(context).cardColor,
+                        color: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                            color: AppTheme.bgLightSurface.withValues(
+                            color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface).withValues(
                               alpha: 0.8,
                             ),
                             width: 1.5,
@@ -210,7 +210,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 color: AppTheme.primaryPurple,
                               ),
                               hintText: 'Full Name',
-                              fillColor: Colors.white,
+                              fillColor: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                               filled: true,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -234,11 +234,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Email Field Card
                       Card(
                         elevation: 0,
-                        color: Theme.of(context).cardColor,
+                        color: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                            color: AppTheme.bgLightSurface.withValues(
+                            color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface).withValues(
                               alpha: 0.8,
                             ),
                             width: 1.5,
@@ -258,7 +258,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 color: AppTheme.primaryPurple,
                               ),
                               hintText: 'Email Address',
-                              fillColor: Colors.white,
+                              fillColor: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                               filled: true,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -285,11 +285,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Password Field Card
                       Card(
                         elevation: 0,
-                        color: Theme.of(context).cardColor,
+                        color: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                            color: AppTheme.bgLightSurface.withValues(
+                            color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface).withValues(
                               alpha: 0.8,
                             ),
                             width: 1.5,
@@ -309,7 +309,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 color: AppTheme.primaryPurple,
                               ),
                               hintText: 'Password',
-                              fillColor: Colors.white,
+                              fillColor: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                               filled: true,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -345,11 +345,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Confirm Password Field Card
                       Card(
                         elevation: 0,
-                        color: Theme.of(context).cardColor,
+                        color: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                            color: AppTheme.bgLightSurface.withValues(
+                            color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface).withValues(
                               alpha: 0.8,
                             ),
                             width: 1.5,
@@ -369,7 +369,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 color: AppTheme.primaryPurple,
                               ),
                               hintText: 'Confirm Password',
-                              fillColor: Colors.white,
+                              fillColor: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                               filled: true,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),

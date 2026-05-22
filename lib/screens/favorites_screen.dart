@@ -1,6 +1,5 @@
 import 'package:e_commerce_app_with_provider/providers/navigation_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import '../providers/favorite_provider.dart';
 import '../theme/app_theme.dart';
@@ -27,12 +26,12 @@ class FavoritesScreen extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppTheme.bgLightSurface,
+              color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
               shape: BoxShape.circle,
             ),
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
+              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
               size: 18,
             ),
           ),
@@ -93,7 +92,7 @@ class FavoritesScreen extends StatelessWidget {
                       ),
                       child: Icon(
                         Icons.favorite_rounded,
-                        color: Theme.of(context).cardColor,
+                        color: Colors.white,
                         size: 24,
                       ),
                     ),
@@ -194,13 +193,13 @@ class FavoritesScreen extends StatelessWidget {
               gradient: AppTheme.pinkGradient,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
+            child: Icon(
               Icons.favorite_border_rounded,
               size: 50,
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'No favorites yet',
             style: TextStyle(
@@ -213,7 +212,7 @@ class FavoritesScreen extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Text(

@@ -50,7 +50,7 @@ class ProductDetailScreen extends StatelessWidget {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.3),
+                  color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -58,7 +58,7 @@ class ProductDetailScreen extends StatelessWidget {
                       ? '${product.name.substring(0, 25)}...'
                       : product.name,
                   style: TextStyle(
-                    color: Theme.of(context).cardColor,
+                    color: Colors.white,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),
@@ -71,8 +71,8 @@ class ProductDetailScreen extends StatelessWidget {
                     imageUrl: product.imageUrl,
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Container(
-                      decoration: const BoxDecoration(
-                        color: AppTheme.bgLightSurface,
+                      decoration: BoxDecoration(
+                        color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
                       ),
                       child: const Center(
                         child: CircularProgressIndicator(
@@ -137,7 +137,7 @@ class ProductDetailScreen extends StatelessWidget {
                         child: Text(
                           '-${product.discountPercentage}% OFF',
                           style: TextStyle(
-                            color: Theme.of(context).cardColor,
+                            color: Colors.white,
                             fontSize: 13,
                             fontWeight: FontWeight.w800,
                           ),
@@ -151,7 +151,7 @@ class ProductDetailScreen extends StatelessWidget {
               preferredSize: const Size.fromHeight(1),
               child: Container(
                 height: 1,
-                color: Theme.of(context).cardColor.withValues(alpha: 0.1),
+                color: Colors.white.withValues(alpha: 0.1),
               ),
             ),
           ),
@@ -177,7 +177,7 @@ class ProductDetailScreen extends StatelessWidget {
                     child: Text(
                       'Free Shipping',
                       style: TextStyle(
-                        color: Theme.of(context).cardColor,
+                        color: Colors.white,
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
                       ),
@@ -210,14 +210,14 @@ class ProductDetailScreen extends StatelessWidget {
                       _buildShareButton(context),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
 
                   // Price Section
                   _buildPriceSection(context),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
 
                   // Divider
-                  const Divider(color: AppTheme.bgLightSurface, thickness: 1),
+                  Divider(color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface), thickness: 1),
                   SizedBox(height: 20),
 
                   // Description Section
@@ -273,15 +273,15 @@ class ProductDetailScreen extends StatelessWidget {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.15),
+              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withValues(alpha: 0.15),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
           ],
         ),
-        child: const Icon(
+        child: Icon(
           Icons.arrow_back_ios_new_rounded,
-          color: Colors.black,
+          color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
           size: 18,
         ),
       ),
@@ -303,13 +303,13 @@ class ProductDetailScreen extends StatelessWidget {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.15),
+              color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withValues(alpha: 0.15),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
           ],
         ),
-        child: Icon(icon, color: Colors.black, size: 20),
+        child: Icon(icon, color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black), size: 20),
       ),
     );
   }
@@ -375,7 +375,7 @@ class ProductDetailScreen extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: AppTheme.bgLightSurface,
+          color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Icon(

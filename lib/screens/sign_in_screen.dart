@@ -158,7 +158,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           child: Icon(
                             Icons.shopping_bag_rounded,
-                            color: Theme.of(context).cardColor,
+                            color: Colors.white,
                             size: 48,
                           ),
                         ),
@@ -198,11 +198,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       // Email Field Card
                       Card(
                         elevation: 0,
-                        color: Theme.of(context).cardColor,
+                        color: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                            color: AppTheme.bgLightSurface.withValues(
+                            color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface).withValues(
                               alpha: 0.8,
                             ),
                             width: 1.5,
@@ -226,7 +226,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 color: AppTheme.primaryPurple,
                               ),
                               hintText: 'Email Address',
-                              fillColor: Colors.white,
+                              fillColor: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                               filled: true,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -253,11 +253,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       // Password Field Card
                       Card(
                         elevation: 0,
-                        color: Theme.of(context).cardColor,
+                        color: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                            color: AppTheme.bgLightSurface.withValues(
+                            color: (Theme.of(context).brightness == Brightness.dark ? Color(0xFF1E1E38) : AppTheme.bgLightSurface).withValues(
                               alpha: 0.8,
                             ),
                             width: 1.5,
@@ -281,7 +281,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 color: AppTheme.primaryPurple,
                               ),
                               hintText: 'Password',
-                              fillColor: Colors.white,
+                              fillColor: (Theme.of(context).brightness == Brightness.dark ? AppTheme.bgSurface : Colors.white),
                               filled: true,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
